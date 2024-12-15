@@ -21,6 +21,11 @@ class CustomTextStyles {
   static get profileHeadlineMediumBlack => theme.textTheme.headlineMedium!.copyWith(
     fontSize: 20,
   );
+
+  static get advisorHeadlineSmallBlack => theme.textTheme.headlineMedium!.copyWith(
+    fontSize: 20,
+    fontWeight: FontWeight.w900
+  );
   static get headlineSmallBlack => theme.textTheme.headlineLarge!.copyWith(
     color: appTheme.black900,
   );
@@ -29,6 +34,16 @@ class CustomTextStyles {
     color: appTheme.black900,
     fontWeight: FontWeight.bold,
     fontSize: 12,
+  );
+
+  static get recomHeadlineMediumBlack => theme.textTheme.headlineMedium!.copyWith(
+    fontSize: 15,
+    color: Color.fromARGB(255, 122, 114, 145),
+  );
+
+  static get recomHeadlineMediumWhite => theme.textTheme.headlineMedium!.copyWith(
+    fontSize: 15,
+    color: Colors.white,
   );
 
 }

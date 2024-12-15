@@ -1,6 +1,6 @@
 import 'package:film_library/presentations/auth.dart';
 import 'package:film_library/presentations/film_annotation.dart';
-import 'package:film_library/presentations/watched_films.dart';
+import 'package:film_library/presentations/advisor.dart';
 import 'package:film_library/utils/constants/image_constants.dart';
 import 'package:film_library/utils/size_utils.dart';
 import 'package:film_library/utils/theme/custom_text_styles.dart';

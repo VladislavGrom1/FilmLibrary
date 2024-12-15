@@ -31,9 +31,12 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.inputFormatter,
     this.onChanged,
+    this.height,
   });
 
   final Alignment? alignment;
+
+  final double? height;
 
   final double? width;
 
@@ -93,6 +96,7 @@ class CustomTextFormField extends StatelessWidget {
 
   Widget get textFormFieldWidget => Container(
         width: width ?? double.maxFinite,
+        height: height ?? 30.v,
         margin: margin,
         child: TextFormField(
           controller: controller,

@@ -1,5 +1,5 @@
 import 'package:film_library/data/filmLibrary.dart';
-import 'package:film_library/presentations/advisor.dart';
+import 'package:film_library/presentations/services.dart';
 import 'package:film_library/presentations/library.dart';
 import 'package:film_library/presentations/profile.dart';
 import 'package:film_library/utils/constants/image_constants.dart';
@@ -18,7 +18,7 @@ class _MainBottomBarState extends State<MainBottomBar> {
   final List<Widget> _children = [
     Profile(),
     Library(filmAnnotations: annotations),
-    Advisor()
+    Services()
   ];
 
   void onTabTapped(int index) {

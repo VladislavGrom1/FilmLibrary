@@ -45,8 +45,14 @@ class ImageConstant {
   static const String filmPoster4 = '$_imagePathPosters/Film4.png';
   static const String filmPoster5 = '$_imagePathPosters/Film5.png';
   static const String filmPoster6 = '$_imagePathPosters/Film6.png';
+  static const String filmPoster7 = '$_imagePathPosters/Film7.png';
+  static const String filmPoster8 = '$_imagePathPosters/Film8.png';
+  static const String filmPoster9 = '$_imagePathPosters/Film9.png';
 
   // Кнопка информации
   static const String infoButton = '$_imagePath/Info.svg';
+
+  // Кнопка выбора
+  static const String choiseButton = '$_imagePath/Choise.svg';
 
 }

@@ -1,26 +1,29 @@
-
+import 'package:film_library/presentations/services.dart';
+import 'package:film_library/presentations/favourite_films.dart';
+import 'package:film_library/presentations/library.dart';
 import 'package:film_library/utils/constants/image_constants.dart';
 import 'package:film_library/utils/size_utils.dart';
 import 'package:film_library/utils/theme/custom_text_styles.dart';
 import 'package:film_library/utils/theme/theme_helper.dart';
+import 'package:film_library/widgets/bottom_bar.dart';
 import 'package:film_library/widgets/custom_image_view.dart';
 import 'package:film_library/widgets/main_text_button.dart';
-import 'package:film_library/widgets/main_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class WatchedFilms extends StatefulWidget{
-  const WatchedFilms ({super.key});
+class Services extends StatefulWidget {
+  Services({super.key});
 
   @override
-  _FavourityState createState() => _FavourityState();
+  _ServicesState createState() => _ServicesState();
+
+  
 }
 
-class _FavourityState extends State<WatchedFilms>{
+class _ServicesState extends State<Services> {
   
-  late String searchString = "";
-
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: appTheme.mainBlueGray,
@@ -48,25 +51,25 @@ class _FavourityState extends State<WatchedFilms>{
               MainTextButton(
                 text: "Привязать аккаунт KinoPoisk",
                 colorButton: appTheme.orange900,
-                functionOnClick: () => (Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => WatchedFilms()))),
+                functionOnClick: () => (),
               ),
               SizedBox(height: 20.v),
               MainTextButton(
                 text: "Привязать аккаунт Okko",
                 colorButton: appTheme.purpleButton,
-                functionOnClick: () => (Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => WatchedFilms()))),
+                functionOnClick: () => (),
               ),
               SizedBox(height: 20.v),
               MainTextButton(
                 text: "Привязать аккаунт More.tv",
                 colorButton: appTheme.gray600,
-                functionOnClick: () => (Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => WatchedFilms()))),
+                functionOnClick: () => (),
               ),
               SizedBox(height: 20.v),
               MainTextButton(
                 text: "Привязать аккаунт Kion",
                 colorButton: appTheme.darkRedButton,
-                functionOnClick: () => (Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => WatchedFilms()))),
+                functionOnClick: () => (),
               ),
               Spacer(),
               Padding(
@@ -80,14 +83,19 @@ class _FavourityState extends State<WatchedFilms>{
               ),
               SizedBox(height: 20.v),
               MainTextButton(
-                text: "Пропустить",
+                text: "Далее",
                 colorButton: appTheme.blueButton,
-                functionOnClick: () => (Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => WatchedFilms()))),
+                functionOnClick: () => (Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => FavouriteFilms()))),
               ),
               SizedBox(height: 20.v),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: () {setState(() { MainBottomBar(); });} (), 
+              )
             ],
           ),
         )
+        
  
       )
       );
