@@ -1,5 +1,7 @@
+import 'package:film_library/data/filmLibrary.dart';
 import 'package:film_library/presentations/library.dart';
 import 'package:film_library/presentations/registration.dart';
+import 'package:film_library/utils/constants/globals.dart';
 import 'package:film_library/utils/constants/image_constants.dart';
 import 'package:film_library/utils/size_utils.dart';
 import 'package:film_library/utils/theme/custom_text_styles.dart';
@@ -11,8 +13,17 @@ import 'package:flutter/material.dart';
 
 import '../widgets/main_text_button.dart';
 
-class Auth extends StatelessWidget{
+class Auth extends StatefulWidget{
   const Auth({super.key});
+
+  @override
+  _AuthState createState() => _AuthState();
+}
+
+class _AuthState extends State<Auth>{
+
+  String inputEmail = "";
+  String inputPassword = "";
 
   @override
   Widget build(BuildContext context){
@@ -30,18 +41,38 @@ class Auth extends StatelessWidget{
                 svgPath: ImageConstant.pattern1,
               ),
               SizedBox(height: 60.v),
-              const MainTextFormField(
+              MainTextFormField(
                 hintText: "Email",
+                onChanged: (value) {setState(() {
+                  inputEmail = value;
+                });
+                }
               ),
               SizedBox(height: 30.v),
-              const MainTextFormField(
+              MainTextFormField(
                 hintText: "Пароль",
+                onChanged: (value) {setState(() {
+                  inputPassword = value;
+                });
+                },
               ),
               SizedBox(height: 40.v),
               MainTextButton(
                 text: "Войти",
                 colorButton: appTheme.blueButton,
-                functionOnClick: () => (Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const MainBottomBar())))
+                functionOnClick: () => {
+                  for(var i in Globals.usersData)
+                  {
+                    if(i.email == inputEmail && i.password == inputPassword){
+                      Globals.logUser(inputEmail),
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MainBottomBar())),
+                    }
+                    else
+                    {
+                        // Уведомление о неверных данных
+                    }                 
+                  },
+                },
               ),
               const Spacer(),
               Text(
@@ -60,4 +91,8 @@ class Auth extends StatelessWidget{
         ),
     );
   }
+
 }
+
+
+  

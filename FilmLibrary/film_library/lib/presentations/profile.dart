@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:film_library/data/filmLibrary.dart';
+import 'package:film_library/presentations/annotation.dart';
 import 'package:film_library/presentations/auth.dart';
 import 'package:film_library/presentations/favourity.dart';
 import 'package:film_library/presentations/film_annotation.dart';
@@ -9,6 +12,9 @@ import 'package:film_library/utils/theme/app_decoration.dart';
 import 'package:film_library/utils/theme/custom_text_styles.dart';
 import 'package:film_library/utils/theme/theme_helper.dart';
 import 'package:film_library/widgets/bottom_bar.dart';
+import 'package:film_library/widgets/change_email.dart';
+import 'package:film_library/widgets/change_name.dart';
+import 'package:film_library/widgets/change_password.dart';
 import 'package:film_library/widgets/custom_image_view.dart';
 import 'package:film_library/widgets/main_text_button.dart';
 import 'package:film_library/widgets/section_settings.dart';
@@ -22,11 +28,16 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  @override
+  void initState() {
+    super.initState();
+  }
   
   @override
   Widget build(BuildContext context) {
     return SafeArea(
        child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: appTheme.mainBlueGray,
         body: Column(
           children: [
@@ -45,14 +56,37 @@ class _ProfileState extends State<Profile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Владислав",
+                  () {
+
+                    for(var i in Globals.usersData){
+                      if(i.currentUser == true)
+                      {
+                        return i.name;
+                      }
+                    }
+                    return "";
+                    
+                    } (),
+                  
                   style: CustomTextStyles.profileHeadlineMediumBlack,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 6.v),
                 Text(
-                  "vaganov.vladislav2015@yandex.ru",
+                  
+                  () {
+
+                    for(var i in Globals.usersData){
+                      if(i.currentUser == true)
+                      {
+                        return i.email;
+                      }
+                    }
+                    return "";
+                    
+                    } (),
+
                   style: CustomTextStyles.headlineSmallGray,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -68,7 +102,11 @@ class _ProfileState extends State<Profile> {
                 child: Align(
                   alignment: Alignment.center,
                   child: GestureDetector(
-                    onTap: () => (),
+                    onTap: () {
+                      setState(() {
+                        onTapChangeName(context);
+                      });
+                    } ,
                     child: SectionSetting(
                       textSetting: Text("Изменить имя", style: CustomTextStyles.headlineSmallBlack),
                       leftIconPath: ImageConstant.pencilIcon,
@@ -84,7 +122,11 @@ class _ProfileState extends State<Profile> {
                 child: Align(
                   alignment: Alignment.center,
                   child: GestureDetector(
-                    onTap: () => (),
+                    onTap: () {
+                      setState(() {
+                        onTapChangeEmail(context);
+                      });
+                    } ,
                     child: SectionSetting(
                       textSetting: Text("Изменить Email", style: CustomTextStyles.headlineSmallBlack),
                       leftIconPath: ImageConstant.mailIcon,
@@ -100,7 +142,11 @@ class _ProfileState extends State<Profile> {
                 child: Align(
                   alignment: Alignment.center,
                   child: GestureDetector(
-                    onTap: () => (),
+                    onTap: () {
+                      setState(() {
+                        onTapChangePassword(context);
+                      });
+                    } ,
                     child: SectionSetting(
                       textSetting: Text("Изменить пароль", style: CustomTextStyles.headlineSmallBlack),
                       leftIconPath: ImageConstant.keyIcon,
@@ -124,14 +170,23 @@ class _ProfileState extends State<Profile> {
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: () {
-                    if(Globals.history[0].title == "Здесь будет история просмотра")
+
+                    for(var i in Globals.usersData)
                     {
-                      return 0;
+                      if(i.currentUser == true){
+                        for(var j in i.userHistory){
+                          if(j.title == "Здесь будет история просмотра")
+                          {
+                            return 0;
+                          }
+                          else
+                          {
+                            return i.userHistory.length;
+                          }
+                        }
+                      }
                     }
-                    else
-                    {
-                      return Globals.history.length;
-                    }
+                    
                   } 
                   (),
                   itemBuilder: (context, index) {
@@ -141,9 +196,45 @@ class _ProfileState extends State<Profile> {
                 child: Align(
                   alignment: Alignment.center,
                   child: GestureDetector(
-                    onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => FilmAnnotation(annotation: Globals.history[index])))),
+                    onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => FilmAnnotation(
+                      annotation: //Globals.history[index]
+                      () {
+                          
+                          for(var i in Globals.usersData){
+                            if(i.currentUser == true){
+                              return i.userHistory[index];
+                            }
+                          }
+                          return Annotation(title: "", 
+                          year: "", 
+                          country: "", 
+                          genre: "", 
+                          director: "", 
+                          duration: "", 
+                          age: "", 
+                          rating: "", 
+                          mainRoles: "", 
+                          description: "", 
+                          cinema: "", 
+                          imagePath: "");
+
+                      } ()
+                      )))),
                     child: SectionSetting(
-                      textSetting: Text(Globals.history[index].title, style: CustomTextStyles.headlineSmallBlack),
+                      textSetting: Text(
+                        //Globals.history[index].title,
+                        () {
+                          
+                          for(var i in Globals.usersData){
+                            if(i.currentUser == true){
+                              return i.userHistory[index].title;
+                            }
+                          }
+                          return "";
+
+                        } (),
+                         
+                      style: CustomTextStyles.headlineSmallBlack),
                       rightIconPath: ImageConstant.arrowNextIcon,
                       decoration: AppDecoration.outlineBlueGray, 
                       leftIconPath: '',
@@ -164,11 +255,42 @@ class _ProfileState extends State<Profile> {
             Align(
               alignment: Alignment.bottomCenter,
               child: () {setState(() {const MainBottomBar();});} (),  
-            ),
-                    
+            ),            
         ],
         )
        ),
     );
+    
   }
 }
+
+onTapChangeName(final BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (final _) => ChangeNameDialog(
+      headText: "Изменение имени",
+      inputHintText: "Ваше новое имя",
+    ),
+  );
+}
+
+onTapChangeEmail(final BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (final _) => ChangeEmailDialog(
+      headText: "Изменение почты",
+      inputHintText: "Новый Email",
+    ),
+  );
+}
+
+onTapChangePassword(final BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (final _) => ChangePasswordDialog(
+      headText: "Изменение пароля",
+      inputHintText: "Новый пароль",
+    ),
+  );
+}
+                

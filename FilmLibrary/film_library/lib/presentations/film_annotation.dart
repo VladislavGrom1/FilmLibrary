@@ -1,6 +1,5 @@
-
 import 'package:film_library/data/filmLibrary.dart';
-import 'package:film_library/presentations/Annotation.dart';
+import 'package:film_library/presentations/annotation.dart';
 import 'package:film_library/presentations/favourity.dart';
 import 'package:film_library/utils/constants/image_constants.dart';
 import 'package:film_library/utils/size_utils.dart';

@@ -1,5 +1,5 @@
 import 'package:film_library/data/filmLibrary.dart';
-import 'package:film_library/presentations/Annotation.dart';
+import 'package:film_library/presentations/annotation.dart';
 import 'package:film_library/presentations/film_annotation.dart';
 import 'package:film_library/utils/constants/globals.dart';
 import 'package:film_library/utils/constants/image_constants.dart';
