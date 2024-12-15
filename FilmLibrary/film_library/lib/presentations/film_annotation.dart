@@ -1,6 +1,7 @@
 import 'package:film_library/data/filmLibrary.dart';
 import 'package:film_library/presentations/annotation.dart';
 import 'package:film_library/presentations/favourity.dart';
+import 'package:film_library/utils/constants/globals.dart';
 import 'package:film_library/utils/constants/image_constants.dart';
 import 'package:film_library/utils/size_utils.dart';
 import 'package:film_library/utils/theme/custom_text_styles.dart';
@@ -335,24 +336,51 @@ class _FilmAnnotationState extends State<FilmAnnotation>{
                           ],
                         ),
 
-
-                        
-
-
-
-
                     ],
                   ),
                 )
               ),
 
               SizedBox(height: 20.v),
+              // Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Favourity()))
+              () {
+                for(var i in Globals.usersData){
+                  if(i.currentUser == true){
+                    for(var j in i.favourity)
+                    {
+                      if(j == widget.annotation){
+                        return MainTextButton(
+                          text: "Удалить из избранного",
+                          colorButton: appTheme.redButton,
+                          functionOnClick: () {
+                            
+                            setState(() {
+                              Globals.addFilmInFavourity(widget.annotation);
+                              Globals.cleanOneFilmInFavourity(widget.annotation);
+                              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Favourity()));
+                            });
+
+                              //Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Favourity()));
+                          },
+                        );
+                      }
+                    }
+                  }
+                }
+                return MainTextButton(
+                  text: "Добавить в избранное",
+                  colorButton: appTheme.blueButton,
+                  functionOnClick: () {
+                    setState(() {
+                      Globals.addFilmInFavourity(widget.annotation);
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Favourity()));
+                    });
+                },
+              );
+
+
+              } (),
               
-              MainTextButton(
-                text: "Добавить в избранное",
-                colorButton: appTheme.blueButton,
-                functionOnClick: () => (Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Favourity()))),
-              ),
               SizedBox(height: 20.v),
             ],
           ),
